@@ -1,0 +1,23 @@
+{
+    "name": "keven/symfony-console-live-table",
+    "description": "Live table extension for symfony/console",
+    "license": "mit",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Keven Godet",
+            "email": "hello@keven.fr",
+            "homepage": "http://keven.fr",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Keven\\Symfony\\Console\\": "src"
+        }
+    },
+    "require": {
+        "php": "^5.5 || ^7",
+        "symfony/console": "^3.0 || ^4.0"
+    }
+}
