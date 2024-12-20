@@ -109,6 +109,7 @@ final class LiveTable
                 if (mb_strlen($cell) + 2 > $widths[$n]) {
                     $widths[$n] = mb_strlen($cell) + 2;
                 }
+
                 $n++;
             }
         }
@@ -122,6 +123,7 @@ final class LiveTable
         foreach ($this->rows as $row) {
             $lines[] = $this->renderRow($row, $widths);
         }
+
         $lines[] = $this->renderLine($widths);
 
         $this->lastRender = $lines;
@@ -129,7 +131,7 @@ final class LiveTable
         $this->output->writeln(implode("\n", $lines));
     }
 
-    private function clear()
+    public function clear()
     {
         foreach ($this->lastRender as $line) {
             $this->output->write("\r\033[K\033[1A\r\033[K\r");
@@ -158,7 +160,7 @@ final class LiveTable
     }
 }
 
-if ( ! function_exists( 'array_key_last' ) ) {
+if (!function_exists( 'array_key_last')) {
     /**
      * Polyfill for array_key_last() function added in PHP 7.3.
      *
@@ -167,14 +169,14 @@ if ( ! function_exists( 'array_key_last' ) ) {
      *
      * @param array $array An array
      *
-     * @return mixed The last key of array if the array is not empty; NULL otherwise.
+     * @return int|string|null The last key of array if the array is not empty; NULL otherwise.
      */
-    function array_key_last( $array ) {
-        $key = NULL;
-        if ( is_array( $array ) ) {
-            end( $array );
-            $key = key( $array );
+    function array_key_last(array $array) {
+        if (empty($array)) {
+            return null;
         }
-        return $key;
+
+        end($array);
+        return key($array);
     }
 }

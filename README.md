@@ -15,22 +15,22 @@ $ composer require keven/symfony-console-live-table
 
 use Keven\Symfony\Console\LiveTable;
 
-$table = new LiveTable;
-$table->setHeadesr(['Status', 'Name', 'URL']);
-$table->addRow(['<light_red>✗</light_red>', 'PHP', 'https://php.net']);
-$table->addRow(['<light_green>✓</light_green>', 'PHP League', 'https://thephpleague.com']);
+$table = new LiveTable($output);
+$table->setHeaders(['Status', 'Name', 'URL']);
+$table->add(['<fg=red>✗</>', 'PHP', 'https://php.net']);
+$league = $table->add(['<fg=green>✓</>', 'PHP League', 'https://thephpleague.com']);
 $table->render();
 
 // Result in console:
 // +---+------------+--------------------------+
 // | ! | Name       | URL                      |
-// +---+------------+--------------------------+
+// =============================================
 // | ✗ | PHP        | https://php.net          |
 // | ✓ | PHP League | https://thephpleague.com |
 // +---+------------+--------------------------+
 
 // You can also choose the added row index:
-$table->add(['<light_green>✓</light_green>', 'Packagist', 'https://packagist.org'], 'packagist');
+$table->append(['<fg=green>✓</>', 'Packagist', 'https://packagist.org'], 'packagist');
 
 // Result in console:
 // ---------------------------------------------
@@ -54,16 +54,7 @@ $table->remove('packagist');
 // | ✗ | PHP        | https://php.net          |
 // ---------------------------------------------
 
-// Clear all rows
+// Remove the table
 $table->clear();
 
-// Result in console:
-// ---------------------------------------------
-// | ! | Name       | URL                      |
-// =============================================
-// |   |            |                          |
-// ---------------------------------------------
-
-// Finally delete totally the table of the CLI
-$table->delete();
 ```
